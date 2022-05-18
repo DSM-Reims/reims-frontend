@@ -1,9 +1,9 @@
 import React from 'react';
-import mainHeader from './component/header/mainHeader';
+import MainHeader from './component/common/Header';
 
 const App = () => {
     return (
-        <mainHeader></mainHeader>
+        <MainHeader />
     );
 };
 
