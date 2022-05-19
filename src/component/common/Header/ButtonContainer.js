@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ButtonContainer = ({type}) => {
     return (
         <Wrapper>
-            <button>Vote</button>
+            <button type='black'>Vote</button>
         </Wrapper>
     );
 };
@@ -15,11 +15,11 @@ const Wrapper = styled.div`
     button{
         width: 120px;
         height: 50px;
-        border: 0;
+        border: none;
         border-radius: 8px;
+        font-size: 16px;
         background-color: #000000;
         color: #ffffff;
-        font-size: 16px;
         &:hover{
             cursor: pointer;
         }

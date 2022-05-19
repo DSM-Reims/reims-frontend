@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import ButtonContainer from './ButtonContainer';
+import thumbnail from './assets/thumbnail'
 
-const MainHeader = () => {
+const MainHeader = () => {  
     return (
         <Wrapper>
             <HeaderLeft>
@@ -29,7 +30,7 @@ const Wrapper = styled.header`
     padding-bottom: 10px;
     justify-content: space-between;
     position: relative;
-`
+`;
 
 const HeaderLeft = styled.div`
     display: flex;
@@ -40,7 +41,7 @@ const HeaderLeft = styled.div`
         :nth-child(1) {margin-right: 40px;}
         :nth-child(2) {margin-right: 40px;}
     }
-`
+`;
 
 const Title = styled.div`
     &:hover{
@@ -52,4 +53,8 @@ const Title = styled.div`
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
+`;
+
+const Thumbnail = styled(thumbnail)`
+    border: none;
 `
