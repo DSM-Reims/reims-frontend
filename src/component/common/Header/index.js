@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import ButtonContainer from './ButtonContainer';
-import thumbnail from './assets/thumbnail'
 
 const MainHeader = () => {  
     return (
@@ -16,6 +15,7 @@ const MainHeader = () => {
                 <ButtonContainer type=""/>
             </div>
         </Wrapper>
+
     );
 };
 
@@ -54,7 +54,3 @@ const Title = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 `;
-
-const Thumbnail = styled(thumbnail)`
-    border: none;
-`
