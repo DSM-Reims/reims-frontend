@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Body from './component/common/Body';
 import MainHeader from './component/common/Header/';
