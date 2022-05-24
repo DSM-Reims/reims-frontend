@@ -2,12 +2,71 @@ import React from 'react';
 import styled from 'styled-components';
 import ThumbnailImg from '../../../assets/thumbnail.jpg'
 
+// const tempArr = [
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     },
+//     {
+//         src: ThumbnailImg,
+//         title: '제목',
+//         description: 'tjfdwg'
+//     }
+// ]
+
 const ThumbnailExplanation = () => {
     return (
         <Wrapper>
             <ThumbnailItem/>
             <ThumbnailItem/>
             <ThumbnailItem/>
+            {/* <tempArr></tempArr> */} 
         </Wrapper>
     );
 };
@@ -32,7 +91,8 @@ export default ThumbnailExplanation;
 
 const Wrapper = styled.div`
     display: flex;
-    gap: 0px 33px;
+    align-items: center;
+    gap: 30px;
 `
 
 const ThumbImage = styled.img`
