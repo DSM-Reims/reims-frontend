@@ -1,91 +1,123 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ThumbnailImg from '../../../assets/thumbnail.jpg'
+import ThumbnailImg2 from '../../../assets/thumbnail2.jpg'
+import ThumbnailImg3 from '../../../assets/thumbnail3.jpg'
+import ThumbnailImg4 from '../../../assets/thumbnail4.jpg'
+import ThumbnailImg5 from '../../../assets/thumbnail5.jpg'
+import ResultVideo from '../../../assets/wedont.mp4'
 
-// const tempArr = [
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     },
-//     {
-//         src: ThumbnailImg,
-//         title: '제목',
-//         description: 'tjfdwg'
-//     }
-// ]
+const tempArr = [
+    {
+        "club_id": 0,
+        "club_name": "영",
+        "name": "성과전시회 관리 서비스",
+        "simple": "어 간단 설명이야 ~",
+        "description": "짜스 ~~",
+        "thumbnail": ThumbnailImg,
+        "video": ResultVideo,
+        // rank - 0은 랭킹 이외 1 ~ 3 은 등수
+        "rank": 0    
+    },
+    {
+        "club_id": 1,
+        "club_name": "일",
+        "name": "성과전시회 관리 서비스",
+        "simple": "어 간단 설명이야 ~",
+        "description": "짜스 ~~",
+        "thumbnail": ThumbnailImg2,
+        "video": ResultVideo,
+        // rank - 0은 랭킹 이외 1 ~ 3 은 등수
+        "rank": 0    
+    },
+    {
+        "club_id": 2,
+        "club_name": "이",
+        "name": "성과전시회 관리 서비스",
+        "simple": "어 간단 설명이야 ~",
+        "description": "짜스 ~~",
+        "thumbnail": ThumbnailImg3,
+        "video": ResultVideo,
+        // rank - 0은 랭킹 이외 1 ~ 3 은 등수
+        "rank": 0    
+    },
+    {
+        "club_id": 3,
+        "club_name": "삼",
+        "name": "성과전시회 관리 서비스",
+        "simple": "어 간단 설명이야 ~",
+        "description": "짜스 ~~",
+        "thumbnail": ThumbnailImg4,
+        "video": ResultVideo,
+        // rank - 0은 랭킹 이외 1 ~ 3 은 등수
+        "rank": 0    
+    },
+    {
+        "club_id": 4,
+        "club_name": "사",
+        "name": "성과전시회 관리 서비스",
+        "simple": "어 간단 설명이야 ~",
+        "description": "짜스 ~~",
+        "thumbnail": ThumbnailImg5,
+        "video": ResultVideo,
+        // rank - 0은 랭킹 이외 1 ~ 3 은 등수
+        "rank": 0    
+    }
+]
 
-const ThumbnailExplanation = () => {
+const ThumbnailExplanation = ({ setCallback }) => {
+    const [slideSpot, setSlideSpot] = useState(0)
+
+    const SLIDE_GAP = 30;
+    const IMAGE_WIDTH = 400;
+    const slideWidth = IMAGE_WIDTH * tempArr.length + tempArr.length * SLIDE_GAP;
+    const hiddenSlideWidth = slideWidth - window.innerWidth;
+
+    const handlePrevBtn = () => {
+        if (slideWidth < IMAGE_WIDTH) {
+            setSlideSpot(tempArr.length - 1)
+        }
+        else {
+            setSlideSpot()
+        }
+    }
+    
+    const handleNextBtn = () => {
+        if (slideWidth < IMAGE_WIDTH) {
+            setSlideSpot(tempArr.length - slideSpot)
+        }
+        else {
+            
+        }
+    }
+
+    useEffect(() => {
+        setCallback([handlePrevBtn, handleNextBtn]);
+    }, []);
+
     return (
         <Wrapper>
-            <ThumbnailItem/>
-            <ThumbnailItem/>
-            <ThumbnailItem/>
-            {/* <tempArr></tempArr> */} 
+            {
+                tempArr.slice(0, 3).map((club_result, index) => <ThumbnailItem {...club_result} key={index} />)
+            }
         </Wrapper>
     );
 };
 
-const ThumbnailItem = ({ link, clubName }) => {
+const ThumbnailItem = ({ thumbnail, name, simple }) => {
     return (
         <ThumbItem>
-            <ThumbImage src={ThumbnailImg}></ThumbImage>
+            <ThumbImage src={thumbnail}></ThumbImage>
             <div>
-                <div>SoulMate</div>
+                <div>{name}</div>
                 <div className='description'>
-                    영혼의 울림이 같은 세상에 단 하나뿐인 나의 ‘SoulMate’
-                    예기치 못한 순간, 영혼의 단짝을 만나게 된다면 우리의 삶은 어떻게 변할까?
-                    지코가 1년 만에 솔로 싱글 [SoulMate]를 발표한다.
+                    {simple}
                 </div>
             </div>
         </ThumbItem>
-    )
-}
+    );
+};
+
 
 export default ThumbnailExplanation;
 
