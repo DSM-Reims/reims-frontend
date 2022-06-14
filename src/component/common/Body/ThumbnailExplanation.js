@@ -65,36 +65,7 @@ const tempArr = [
     }
 ]
 
-const ThumbnailExplanation = ({ setCallback }) => {
-    const [slideSpot, setSlideSpot] = useState(0)
-
-    const SLIDE_GAP = 30;
-    const IMAGE_WIDTH = 400;
-    const slideWidth = IMAGE_WIDTH * tempArr.length + tempArr.length * SLIDE_GAP;
-    const hiddenSlideWidth = slideWidth - window.innerWidth;
-
-    const handlePrevBtn = () => {
-        if (slideWidth < IMAGE_WIDTH) {
-            setSlideSpot(tempArr.length - 1)
-        }
-        else {
-            setSlideSpot()
-        }
-    }
-    
-    const handleNextBtn = () => {
-        if (slideWidth < IMAGE_WIDTH) {
-            setSlideSpot(tempArr.length - slideSpot)
-        }
-        else {
-            
-        }
-    }
-
-    useEffect(() => {
-        setCallback([handlePrevBtn, handleNextBtn]);
-    }, []);
-
+const ThumbnailExplanation = () => {
     return (
         <Wrapper>
             {

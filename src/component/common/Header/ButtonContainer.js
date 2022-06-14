@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonContainer = ({type}) => {
+const ButtonContainer = ({ btn, color, contents }) => {
     return (
-        <Wrapper>
-            <button type='black'>Vote</button>
+        <Wrapper style={{opacity: btn ? 1 : 0}}> 
+            <button style={{backgroundColor: color}}>{contents}</button>
         </Wrapper>
     );
 };
