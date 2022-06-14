@@ -65,7 +65,8 @@ const tempArr = [
     }
 ]
 
-const ThumbnailExplanation = () => {
+const ThumbnailExplanation = ({ position }) => {
+    console.log(position)
     return (
         <Wrapper>
             {

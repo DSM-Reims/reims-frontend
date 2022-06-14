@@ -5,12 +5,13 @@ import { ReactComponent as LeftArrow } from '../../../assets/chevron-left-solid.
 import { ReactComponent as RightArrow } from '../../../assets/chevron-right-solid.svg'
 
 const Body = () => {
+    const [position, setPosition] = useState(1);
     return (
         <Wrapper>
             <div>
-                <LeftArrow id='left-arrow' width='50' height='50' />
-                <ThumbnailExplanation/>
-                <RightArrow id='right-arrow' width='50' height='50' />
+                <LeftArrow onClick={() => setPosition(position - 1)} id='left-arrow' width='50px' height='50px' />
+                <ThumbnailExplanation position={position}/>
+                <RightArrow onClick={() => setPosition(position + 1)} id='right-arrow' width='50px' height='50px' />
             </div>
         </Wrapper>
     );
