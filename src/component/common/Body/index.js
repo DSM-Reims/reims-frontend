@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; 
 import styled from 'styled-components';
 import ThumbnailExplanation from './ThumbnailExplanation';
 import { ReactComponent as LeftArrow } from '../../../assets/chevron-left-solid.svg'
@@ -8,9 +8,9 @@ const Body = () => {
     return (
         <Wrapper>
             <div>
-                <LeftArrow width='50' height='50' />
-                <ThumbnailExplanation />
-                <RightArrow width='50' height='50' />
+                <LeftArrow id='left-arrow' width='50' height='50' />
+                <ThumbnailExplanation/>
+                <RightArrow id='right-arrow' width='50' height='50' />
             </div>
         </Wrapper>
     );
@@ -29,5 +29,15 @@ const Wrapper = styled.section`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        #left-arrow{
+            :hover{
+                cursor: pointer;
+            }
+        }
+        #right-arrow{
+            :hover{
+                cursor: pointer;
+            }
+        }
     }
 `;

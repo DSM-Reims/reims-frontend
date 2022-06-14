@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ButtonContainer from './ButtonContainer';
 
-const MainHeader = () => {  
+const MainHeader = ({btn, color, contents}) => {  
     return (
         <Wrapper>
             <HeaderLeft>
@@ -11,12 +11,11 @@ const MainHeader = () => {
                 <div>Requirements</div>
             </HeaderLeft>
             <Title>Reims</Title>
-            <div>
-                <ButtonContainer type=""/>
-            </div>
+            <ButtonContainer btn={btn} color={color} contents={contents}/>
         </Wrapper>
 
     );
+
 };
 
 export default MainHeader;
@@ -29,7 +28,7 @@ const Wrapper = styled.header`
     padding: 0px 100px;
     padding-bottom: 10px;
     justify-content: space-between;
-    position: relative;
+    /* position: relative; */
 `;
 
 const HeaderLeft = styled.div`
@@ -47,10 +46,8 @@ const Title = styled.div`
     &:hover{
         cursor: pointer;
     }
-    position: absolute;
+    /* position: absolute; */
     font-size: 48px; 
     font-weight: bolder;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 `;

@@ -1,22 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-import Body from './component/common/Body';
-import MainHeader from './component/common/Header/';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; // eslint-disable-line no-unused-vars
+import Main from './component/Main';
 
 const App = () => {
     return (
-        <Wrapper>
-            <MainHeader />
-            <Body/>
-        </Wrapper>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<Main />} />
+                <Route />
+            </Routes>
+        </BrowserRouter>
     );
 };
 
 export default App;
-
-const Wrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-`
