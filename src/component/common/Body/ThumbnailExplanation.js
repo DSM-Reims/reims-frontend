@@ -66,7 +66,19 @@ const tempArr = [
 ]
 
 const ThumbnailExplanation = ({ position }) => {
-    console.log(position)
+    const imgWidth = '400px'    // 슬라이드 할 이미지의 가로 길이
+    const slideGap = '30px'     // 각 슬라이드 사이의 간격
+    const slideMovingUnit = imgWidth + slideGap     // 슬라이드 버튼 클릭 시 한 번에 넘어가는 길이
+
+    const imgQuantity = position.length     // 총 이미지 수
+    const slideWidth = imgWidth * imgQuantity + slideGap * (imgQuantity - 1)    // 슬라이드 내부 컨텐츠의 전체 길이
+    const hiddenSlideWidth = (slideWidth - 3 * imgWidth - 2 * slideGap)     // 화면에 들어나지 않는 슬라이드의 길이
+    let slideEnd;   
+
+    const handlePrevBtn = () => {
+        
+    }
+
     return (
         <Wrapper>
             {
