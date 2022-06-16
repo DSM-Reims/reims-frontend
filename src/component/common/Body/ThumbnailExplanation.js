@@ -76,7 +76,9 @@ const ThumbnailExplanation = ({ position }) => {
     let slideEnd;   
 
     const handlePrevBtn = () => {
-        
+        if (position - 1 <= slideMovingUnit) {
+            
+        }
     }
 
     return (

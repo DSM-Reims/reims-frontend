@@ -6,6 +6,7 @@ import { ReactComponent as RightArrow } from '../../../assets/chevron-right-soli
 
 const Body = () => {
     const [position, setPosition] = useState(1);
+    
     return (
         <Wrapper>
             <div>
