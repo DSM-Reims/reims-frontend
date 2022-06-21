@@ -6,7 +6,8 @@ import { ReactComponent as RightArrow } from '../../../assets/chevron-right-soli
 import { tempArr } from './tempArr';
 
 const Body = () => {
-    const [position, setPosition] = useState(4);
+    const [position, setPosition] = useState(1);
+    console.log(position)
 
     const imgWidth = 400    // 슬라이드 할 이미지의 가로 길이
     const slideGap = 30     // 각 슬라이드 사이의 간격
@@ -19,6 +20,7 @@ const Body = () => {
 
     const handlePrevBtn = () => {
         if (position < 0) {
+            setPosition(0)
             alert("더 이상 왼쪽으로 넘길 수 없습니다.")
         }
         else{
@@ -28,8 +30,12 @@ const Body = () => {
     }
 
     const handleNextBtn = () => {
-        if (position > tempArr.length) {
-            
+        if (position > tempArr.length -1) {
+            alert("더 이상 오른쪽으로 넘길 수 없습니다.")
+        }
+        else{
+            setPosition(position + 1)
+            console.log(position)
         }
     }
     
@@ -38,7 +44,7 @@ const Body = () => {
             <RelativeContaienr>
                 <ArrowContainer>
                     <LeftArrow onClick={handlePrevBtn} id='left-arrow' width='50px' height='50px' style={position === 0 ? {fill: 'gray'}:{fill: 'black}'}} />
-                    <RightArrow onClick={} id='right-arrow' width='50px' height='50px' style={position === tempArr.length -1 ? {fill: 'gray'}:{fill: 'black}'}} />
+                    <RightArrow onClick={handleNextBtn} id='right-arrow' width='50px' height='50px' style={position === tempArr.length -1 ? {fill: 'gray'}:{fill: 'black}'}} />
                 </ArrowContainer>
                 <ThumbnailExplanation />
             </RelativeContaienr>
