@@ -6,7 +6,7 @@ import ButtonContainer from '../Header/ButtonContainer';
 const ResultUpload = ({ buttons = [] }) => {
     return (
         <div>
-            <MainHeader />
+          <MainHeader />
             <FlexRow gap={10}>
                 {buttons && (
                     <>

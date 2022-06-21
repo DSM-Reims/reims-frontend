@@ -7,7 +7,7 @@ import { tempArr } from './tempArr';
 import { useEffect } from 'react';
 
 const Body = () => {
-    const [position, setPosition] = useState(1);
+    const [position, setPosition] = useState(0);
 
     const imgWidth = 400    // 슬라이드 할 이미지의 가로 길이
     const slideGap = 30     // 각 슬라이드 사이의 간격
@@ -47,7 +47,7 @@ const Body = () => {
                     <LeftArrow onClick={handlePrevBtn} id='left-arrow' width='50px' height='50px' style={{opacity: position === 0 ? "0.2" : "1", transition: '0.5s'}} />
                     <RightArrow onClick={handleNextBtn} id='right-arrow' width='50px' height='50px' style={{opacity : position === tempArr.length - 1 ? "0.2q" : "1", transition: '0.5s'}} />
                 </ArrowContainer>
-                <ThumbnailExplanation />
+                <ThumbnailExplanation position={position} />
             </RelativeContaienr>
         </Wrapper>
     );
@@ -68,7 +68,6 @@ const RelativeContaienr = styled.div`
     display: flex;
     align-items: center;
     position: relative;
-    
 `;
 
 const ArrowContainer = styled.div`
@@ -78,6 +77,7 @@ const ArrowContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     position: absolute;
+    z-index: 2;
         #left-arrow{
             :hover{
                 cursor: pointer;
@@ -89,3 +89,4 @@ const ArrowContainer = styled.div`
             }
         }
 `;
+
