@@ -4,10 +4,10 @@ import ThumbnailExplanation from './ThumbnailExplanation';
 import { ReactComponent as LeftArrow } from '../../../assets/chevron-left-solid.svg'
 import { ReactComponent as RightArrow } from '../../../assets/chevron-right-solid.svg'
 import { tempArr } from './tempArr';
+import { useEffect } from 'react';
 
 const Body = () => {
     const [position, setPosition] = useState(1);
-    console.log(position)
 
     const imgWidth = 400    // 슬라이드 할 이미지의 가로 길이
     const slideGap = 30     // 각 슬라이드 사이의 간격
@@ -19,32 +19,33 @@ const Body = () => {
     let slideEnd;   
 
     const handlePrevBtn = () => {
-        if (position < 0) {
-            setPosition(0)
+        if (position < 1) {
             alert("더 이상 왼쪽으로 넘길 수 없습니다.")
         }
         else{
             setPosition(position - 1)
-            console.log(position)
         }
     }
 
     const handleNextBtn = () => {
-        if (position > tempArr.length -1) {
+        if (position > tempArr.length - 2) {
             alert("더 이상 오른쪽으로 넘길 수 없습니다.")
         }
         else{
             setPosition(position + 1)
-            console.log(position)
         }
     }
-    
+
+    useEffect(() => {
+        console.log(position)
+    }, [position])
+
     return (
         <Wrapper>
             <RelativeContaienr>
                 <ArrowContainer>
-                    <LeftArrow onClick={handlePrevBtn} id='left-arrow' width='50px' height='50px' style={position === 0 ? {fill: 'gray'}:{fill: 'black}'}} />
-                    <RightArrow onClick={handleNextBtn} id='right-arrow' width='50px' height='50px' style={position === tempArr.length -1 ? {fill: 'gray'}:{fill: 'black}'}} />
+                    <LeftArrow onClick={handlePrevBtn} id='left-arrow' width='50px' height='50px' style={{opacity: position === 0 ? "0.2" : "1", transition: '0.5s'}} />
+                    <RightArrow onClick={handleNextBtn} id='right-arrow' width='50px' height='50px' style={{opacity : position === tempArr.length - 1 ? "0.2q" : "1", transition: '0.5s'}} />
                 </ArrowContainer>
                 <ThumbnailExplanation />
             </RelativeContaienr>
