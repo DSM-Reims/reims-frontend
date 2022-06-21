@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MainHeader from './common/Header';
-import Body from './common/Body';
+import Body from './common/main';
 
 const Main = () => {
     return (
