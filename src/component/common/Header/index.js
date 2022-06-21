@@ -46,7 +46,7 @@ const Wrapper = styled.header`
   padding: 0px 100px;
   padding-bottom: 10px;
   justify-content: space-between;
-  /* position: relative; */
+  /* position: relative; *
 `;
 
 const HeaderLeft = styled.div`
