@@ -4,15 +4,10 @@ import MainHeader from './common/Header';
 import Body from './common/Body';
 
 const Main = () => {
-    const [btn, setBtn] = useState({
-        btn : true,
-        color : "black",
-        contents : "Vote"
-    });
     return (
         <MainPage>
-            <MainHeader {...btn} />
-            <Body/>
+            <MainHeader />
+            <Body />
         </MainPage>
     );
 }    
