@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom"; // eslint-disable-line no-unused-vars
 import Main from "./component/Main";
 import Requirements from "./component/requirements";
-import ResultUpload from "./component/common/resultuploda";
+import ResultUpload from "./component/common/resultupload";
 
 const App = () => {
   return (
