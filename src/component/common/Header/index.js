@@ -3,19 +3,21 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FlexRow } from "../Flex";
 import ButtonContainer from "./ButtonContainer";
+import { useCode } from "../../../hooks";
 
 const MainHeader = ({ buttons = [] }) => {
+  const code = useCode();
   return (
     <Wrapper>
       <HeaderLeft>
         <div>
-          <Link to="/">Home</Link>
+          <Link to={`/${code}/home`}>Home</Link>
         </div>
         <div>
-          <Link to="/resultupload">Upload</Link>
+          <Link to={`/${code}/resultupload`}>Upload</Link>
         </div>
         <div>
-          <Link to="/requirement">Requirements</Link>
+          <Link to={`/${code}/requirement`}>Requirements</Link>
         </div>
       </HeaderLeft>
       <Title>Reims</Title>
@@ -48,7 +50,6 @@ const Wrapper = styled.header`
   padding: 0px 100px;
   padding-bottom: 10px;
   justify-content: space-between;
-
 `;
 
 const HeaderLeft = styled.div`

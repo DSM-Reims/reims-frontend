@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { tempArr } from "./tempArr";
+import { useQuery } from "react-query";
+import { getVotes } from "./apis";
+import { useCode } from "../../../hooks";
 
-const ThumbnailExplanation = ({ position }) => {
+const ThumbnailExplanation = ({ position, data }) => {
   return (
     <Wrapper num={position}>
-      {tempArr.map(
-        (club_result, index) => (
-          <ThumbnailItem
-            {...club_result}
-            key={index}
-            index={index}
-            position={position}
-          />
-        )
-      )}
+      {data?.map((item, index) => (
+        <ThumbnailItem
+          {...item}
+          key={index}
+          index={index}
+          position={position}
+        />
+      ))}
     </Wrapper>
   );
 };
 
-const ThumbnailItem = ({ thumbnail, name, simple, index, position }) => {
+const ThumbnailItem = ({
+  clubId,
+  thumbnail,
+  name,
+  description,
+  index,
+  position,
+}) => {
+  const code = useCode();
+  const { data } = useQuery(["getVotes", clubId], () => getVotes(code, clubId));
+
   return (
     <ThumbItem style={position === index ? null : { opacity: 0.7 }}>
       <ThumbImage
@@ -27,8 +37,10 @@ const ThumbnailItem = ({ thumbnail, name, simple, index, position }) => {
         style={position === index ? { width: "500px", height: "500px" } : {}}
       />
       <div>
-        <div>{name}</div>
-        <div className="description">{simple}</div>
+        <div>
+          {name} | 투표수 {data}
+        </div>
+        <div className="description">{description}</div>
       </div>
     </ThumbItem>
   );
@@ -37,11 +49,6 @@ const ThumbnailItem = ({ thumbnail, name, simple, index, position }) => {
 const imgWidth = 400; // 슬라이드 할 이미지의 가로 길이
 const slideGap = 30; // 각 슬라이드 사이의 간격
 const slideMovingUnit = imgWidth + slideGap; // 슬라이드 버튼 클릭 시 한 번에 넘어가는 길이
-
-const imgQuantity = tempArr.length - 1; // 총 이미지 수
-const slideWidth = imgWidth * imgQuantity + slideGap * (imgQuantity - 2); // 슬라이드 내부 컨텐츠의 전체 길이
-const hiddenSlideWidth = slideWidth - 3 * imgWidth - 2 * slideGap; // 화면에 들어나지 않는 슬라이드의 길이
-let slideEnd;
 
 export default ThumbnailExplanation;
 

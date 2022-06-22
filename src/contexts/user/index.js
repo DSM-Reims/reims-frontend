@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import ApiAgent from "../../apiAgent";
 import { useQuery } from "react-query";
 
-const getUser = async (code) => await ApiAgent.get("/user", {}, code);
+const getUser = async (code) => await ApiAgent.get("/users", {}, code);
 
 const UserContext = createContext({
   name: "존재하지 않는 유저",

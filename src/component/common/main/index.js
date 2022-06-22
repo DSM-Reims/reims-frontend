@@ -3,12 +3,28 @@ import styled from "styled-components";
 import ThumbnailExplanation from "./ThumbnailExplanation";
 import { ReactComponent as LeftArrow } from "../../../assets/chevron-left-solid.svg";
 import { ReactComponent as RightArrow } from "../../../assets/chevron-right-solid.svg";
-import { tempArr } from "./tempArr";
-import { useEffect } from "react";
+
+import MainHeader from "../Header";
+import { useCode } from "../../../hooks";
+import { getResult, postVotes } from "./apis";
+import { useQuery, useMutation } from "react-query";
+import { queryClient } from "../../../index";
+import { useUser } from "../../../contexts/user";
 
 const Body = () => {
   const [position, setPosition] = useState(0);
-
+  const code = useCode();
+  const {} = useUser();
+  const { data } = useQuery("getResult", () => getResult(code));
+  const { mutate: votesMutation } = useMutation(
+    () => postVotes(code, data[position].clubId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["getVotes", data[position].clubId]);
+        queryClient.invalidateQueries("getResult");
+      },
+    }
+  );
   const handlePrevBtn = () => {
     if (position < 1) {
       alert("더 이상 왼쪽으로 넘길 수 없습니다.");
@@ -18,7 +34,7 @@ const Body = () => {
   };
 
   const handleNextBtn = () => {
-    if (position > tempArr.length - 2) {
+    if (position > data.length - 2) {
       alert("더 이상 오른쪽으로 넘길 수 없습니다.");
     } else {
       setPosition(position + 1);
@@ -26,33 +42,50 @@ const Body = () => {
   };
 
   return (
-    <Wrapper>
-      <RelativeContainer>
-        <ArrowContainer>
-          <LeftArrow
-            onClick={handlePrevBtn}
-            id="left-arrow"
-            width="50px"
-            height="50px"
-            style={{
-              opacity: position === 0 ? "0.2" : "1",
-              transition: "0.5s",
-            }}
-          />
-          <RightArrow
-            onClick={handleNextBtn}
-            id="right-arrow"
-            width="50px"
-            height="50px"
-            style={{
-              opacity: position === tempArr.length -1 ? "0.2" : "1",
-              transition: "0.5s",
-            }}
-          />
-        </ArrowContainer>
-        <ThumbnailExplanation position={position} />
-      </RelativeContainer>
-    </Wrapper>
+    <>
+      <MainHeader
+        buttons={[
+          {
+            color: "black",
+            text: "Vote",
+            onClick: () => {
+              // eslint-disable-next-line no-restricted-globals
+              const result = confirm(`에 투표하시겠습니까?`);
+              if (result) {
+                votesMutation();
+              }
+            },
+          },
+        ]}
+      />
+      <Wrapper>
+        <RelativeContainer>
+          <ArrowContainer>
+            <LeftArrow
+              onClick={handlePrevBtn}
+              id="left-arrow"
+              width="50px"
+              height="50px"
+              style={{
+                opacity: position === 0 ? "0.2" : "1",
+                transition: "0.5s",
+              }}
+            />
+            <RightArrow
+              onClick={handleNextBtn}
+              id="right-arrow"
+              width="50px"
+              height="50px"
+              style={{
+                opacity: position === data?.length || 0 - 1 ? "0.2" : "1",
+                transition: "0.5s",
+              }}
+            />
+          </ArrowContainer>
+          <ThumbnailExplanation position={position} data={data} />
+        </RelativeContainer>
+      </Wrapper>
+    </>
   );
 };
 
