@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import MainHeader from './common/Header';
-import Body from './common/Body';
+import React, { useState } from "react";
+import styled from "styled-components";
+import MainHeader from "./common/Header";
+import Body from "./common/main";
 
 const Main = () => {
-    const [btn, setBtn] = useState({
-        btn : true,
-        color : "black",
-        contents : "Vote"
-    });
-    return (
-        <MainPage>
-            <MainHeader {...btn} />
-            <Body/>
-        </MainPage>
-    );
-}    
+  return (
+    <MainPage>
+      <MainHeader
+        buttons={[
+          {
+            color: "black",
+            text: "Vote",
+            onClick: () => alert(`에 투표하시겠습니까?`)
+          },
+        ]}
+      />
+      <Body />
+    </MainPage>
+  );
+};
 
 export default Main;
 
 const MainPage = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;

@@ -118,7 +118,7 @@ const Requirements = () => {
               onClick: () => setEdit(!edit),
             },
             {
-              color: "rgb(240, 113, 101)",
+              color: "red",
               text: "Delete",
               onClick: () => setEdit(!edit),
             },

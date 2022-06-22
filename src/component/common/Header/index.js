@@ -11,7 +11,9 @@ const MainHeader = ({ buttons = [] }) => {
         <div>
           <Link to="/">Home</Link>
         </div>
-        <div>Upload</div>
+        <div>
+          <Link to="/resultupload">Upload</Link>
+        </div>
         <div>
           <Link to="/requirement">Requirements</Link>
         </div>
