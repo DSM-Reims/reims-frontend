@@ -1,20 +1,25 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://ec2-3-39-190-171.ap-northeast-2.compute.amazonaws.com:3000",
-  timeout: 1000,
+  baseURL: "http://ec2-52-79-202-92.ap-northeast-2.compute.amazonaws.com:3000",
+  timeout: 10000,
 });
 
 class ApiAgent {
-  static get(url, data, code) {
-    instance.get(url, data, {
+  static async get(url, data, code) {
+    const { data: response } = await instance.get(url, {
       headers: {
+        Authorization: `${code}`,
         "X-API-Key": code,
       },
+      params: {
+        ...data,
+      },
     });
+    return response;
   }
-  static post(url, data, code) {
-    instance.post(url, data, {
+  static async post(url, data, code) {
+    return await instance.post(url, data, {
       headers: {
         "X-API-Key": code,
       },

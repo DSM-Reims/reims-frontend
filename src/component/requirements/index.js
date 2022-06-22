@@ -1,51 +1,98 @@
 import MainHeader from "../common/Header";
-import { FlexRow, FlexCol } from "../common/Flex";
+import { FlexCol } from "../common/Flex";
 import styled, { keyframes } from "styled-components";
 import { useState } from "react";
 import ButtonContainer from "../common/Header/ButtonContainer";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useCode } from "../../hooks";
-import { postObjectApply } from "./apis";
+import { postObjectApply, getObjects, deleteObject } from "./apis";
+import { queryClient } from "../../index";
+import { useUser } from "../../contexts/user";
 
-const RequirementItem = ({ edit }) => {
+const RequirementItem = ({
+  uuid,
+  clubName,
+  applicant,
+  product,
+  url,
+  applicatedAt,
+  returnedAt,
+  isReturned,
+}) => {
+  const code = useCode();
+  const { mutate: deleteObjectMutation } = useMutation(
+    () =>
+      deleteObject(code, {
+        applicationId: uuid,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getObject");
+      },
+    }
+  );
+
   return (
     <tr>
-      <td>테스트</td>
-      <td>테스트</td>
-      <td>테스트</td>
-      <td>테스트</td>
-      <td>테스트</td>
-      <td>테스트</td>
-      <td>테스트</td>
-      <td>{edit && <input type="checkbox" />}</td>
+      <td>{clubName}</td>
+      <td>{applicant}</td>
+      <td>{product}</td>
+      <td>{url}</td>
+      <td>{applicatedAt}</td>
+      <td>{returnedAt}</td>
+      <td>{isReturned ? "반납" : "미반납"}</td>
+      <td onClick={deleteObjectMutation}>삭제</td>
     </tr>
   );
 };
 
 const Modal = ({ modalClose }) => {
   const code = useCode();
+  const { userData } = useUser();
   const [object, setObject] = useState({
     goodsName: "",
     url: "",
-    clubName: undefined,
+    clubName: "",
   });
 
   const onChangeHandler = (e) => {
     setObject({ ...object, [e.target.name]: e.target.value });
   };
-  const { mutate } = useMutation(() => postObjectApply(code, object));
+  const { mutate } = useMutation(() => postObjectApply(code, object), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getObject");
+      modalClose();
+    },
+  });
   return (
     <ModalContainer>
       <FlexCol align="center" className="modal-contents" gap={20}>
         <h3>물품 신청</h3>
-        <Input onChange={onChangeHandler} name="goodsName" placeholder="물품" />
-        <Input onChange={onChangeHandler} name="url" placeholder="URL" />
-        <ButtonContainer contents={"Apply"} btn />
+        <Input
+          onChange={onChangeHandler}
+          value={object.goodsName}
+          name="goodsName"
+          placeholder="물품"
+        />
+        <Input
+          onChange={onChangeHandler}
+          value={object.url}
+          name="url"
+          placeholder="URL"
+        />
+        {userData?.userType === "ClUB" && (
+          <Input
+            onChange={onChangeHandler}
+            value={object.clubName}
+            name="clubName"
+            placeholder="클럽 이름"
+          />
+        )}
+        <ButtonContainer onClick={mutate} contents={"Apply"} btn />
       </FlexCol>
       <div
         className="overlay"
         onClick={() => {
-          mutate();
           modalClose();
         }}
       />
@@ -101,29 +148,18 @@ const Input = styled.input`
 const Requirements = () => {
   const code = useCode();
   const [isOpen, setOpen] = useState(false);
-  const [edit, setEdit] = useState(false);
+
   const modalClose = () => {
     setOpen(false);
   };
+
+  const { data } = useQuery("getObject", () => getObjects(code, {}));
 
   return (
     <>
       {isOpen && <Modal modalClose={modalClose} />}
       <RequirementsWrapper>
-        <MainHeader
-          buttons={[
-            {
-              color: "black",
-              text: "Filter",
-              onClick: () => setEdit(!edit),
-            },
-            {
-              color: "red",
-              text: "Delete",
-              onClick: () => setEdit(!edit),
-            },
-          ]}
-        />
+        <MainHeader />
         <table>
           <thead>
             <tr>
@@ -138,11 +174,9 @@ const Requirements = () => {
             </tr>
           </thead>
           <thead>
-            {Array(12)
-              .fill(-1)
-              .map((_, idx) => (
-                <RequirementItem edit={edit} />
-              ))}
+            {data?.goods.map((item) => (
+              <RequirementItem key={item.uuid} {...item} />
+            ))}
           </thead>
         </table>
 
