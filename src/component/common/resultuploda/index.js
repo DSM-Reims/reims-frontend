@@ -15,13 +15,19 @@ const ResultUpload = ({ buttons = [] }) => {
           />
           <UploadWrapper>
             <UploadContainer>
-
-              <p style={{marginLeft: '50px', marginBottom: "10px"}}>제목</p>
-              <ResultInformationInput />
-              <p style={{marginLeft: '50px', marginBottom: "10px"}}>한 줄 설명</p>
-              <ResultInformationInput />
-              <p style={{marginLeft: '50px', marginBottom: "10px"}}>한 줄 설명</p>
-              <ResultInformationInput style={{height: '450px'}}/>
+              <div>
+                <p style={{marginLeft: '50px', marginBottom: "10px"}}>제목</p>
+                <ResultInformationInput />
+                <p style={{marginLeft: '50px', marginBottom: "10px"}}>한 줄 설명</p>
+                <ResultInformationInput />
+                <p style={{marginLeft: '50px', marginBottom: "10px"}}>한 줄 설명</p>
+                <ResultInformationInput style={{height: '450px'}}/>
+              </div>
+              <div>
+                <label for="ThumnailUpload"></label>
+                <input type='file' id='ThumnailUpload'></input>
+                <input type='file'></input>
+              </div>
             </UploadContainer>
           </UploadWrapper>
       </Wrapper>
@@ -47,14 +53,13 @@ const UploadContainer = styled.div`
   width: 1720px;
   height: 700px;
   display: flex;
-  flex-direction: column;
   background-color: #fafafa;
   border: none;
   border-radius: 5px;
 `
 
 const ResultInformationInput = styled.input`
-  width: 1000px;
+  width: 900px;
   height: 40px;
   border-radius: 8px;
   border: none;
@@ -62,5 +67,3 @@ const ResultInformationInput = styled.input`
   margin-left: 40px;
   outline: none;
 `
-
-const Result
