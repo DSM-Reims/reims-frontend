@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useQuery } from "react-query";
 import { getVotes } from "./apis";
 import { useCode } from "../../../hooks";
+import { useUser } from "../../../contexts/user";
 
 const ThumbnailExplanation = ({ position, data }) => {
   return (
@@ -29,6 +30,7 @@ const ThumbnailItem = ({
 }) => {
   const code = useCode();
   const { data } = useQuery(["getVotes", clubId], () => getVotes(code, clubId));
+  const { userData } = useUser();
 
   return (
     <ThumbItem style={position === index ? null : { opacity: 0.7 }}>
@@ -38,7 +40,7 @@ const ThumbnailItem = ({
       />
       <div>
         <div>
-          {name} | 투표수 {data}
+          {name} {userData === "TEACHER" && `| 투표수 ${data}`}
         </div>
         <div className="description">{description}</div>
       </div>
