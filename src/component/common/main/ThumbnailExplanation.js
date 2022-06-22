@@ -4,7 +4,7 @@ import { tempArr } from './tempArr';
 
 const ThumbnailExplanation = ({ position }) => {
     return (
-        <Wrapper num={position}>
+        <Wrapper pageNum={position}>
             {
                 tempArr.map((club_result, index) => 
                     <ThumbnailItem 
@@ -55,7 +55,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 30px;
-    transform: ${(props) => (`translateX(-${(props.num - 1) * slideMovingUnit}px)`)};
+    transform: ${(props) => (`translateX(-${(props.pageNum - 1) * slideMovingUnit}px)`)};
     transition: 0.3s;
     padding-left: 200px;
 `
