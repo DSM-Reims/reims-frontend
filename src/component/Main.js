@@ -11,6 +11,7 @@ const Main = () => {
           {
             color: "black",
             text: "Vote",
+            onClick: () => alert(`에 투표하시겠습니까?`)
           },
         ]}
       />

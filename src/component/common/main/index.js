@@ -27,7 +27,7 @@ const Body = () => {
 
   return (
     <Wrapper>
-      <RelativeContaienr>
+      <RelativeContainer>
         <ArrowContainer>
           <LeftArrow
             onClick={handlePrevBtn}
@@ -51,7 +51,7 @@ const Body = () => {
           />
         </ArrowContainer>
         <ThumbnailExplanation position={position} />
-      </RelativeContaienr>
+      </RelativeContainer>
     </Wrapper>
   );
 };
@@ -63,11 +63,10 @@ const Wrapper = styled.section`
   height: 100%;
   display: flex;
   padding: 0px 80px;
-
   overflow-x: hidden;
 `;
 
-const RelativeContaienr = styled.div`
+const RelativeContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
