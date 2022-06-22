@@ -5,7 +5,7 @@ import { tempArr } from "./tempArr";
 const ThumbnailExplanation = ({ position }) => {
   return (
     <Wrapper num={position}>
-      {[tempArr[tempArr.length - 1], ...tempArr, tempArr[0]].map(
+      {tempArr.map(
         (club_result, index) => (
           <ThumbnailItem
             {...club_result}

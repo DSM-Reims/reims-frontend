@@ -7,10 +7,10 @@ import { tempArr } from "./tempArr";
 import { useEffect } from "react";
 
 const Body = () => {
-  const [position, setPosition] = useState(1);
+  const [position, setPosition] = useState(0);
 
   const handlePrevBtn = () => {
-    if (position < 2) {
+    if (position < 1) {
       alert("더 이상 왼쪽으로 넘길 수 없습니다.");
     } else {
       setPosition(position - 1);
@@ -18,7 +18,7 @@ const Body = () => {
   };
 
   const handleNextBtn = () => {
-    if (position > tempArr.length - 1) {
+    if (position > tempArr.length - 2) {
       alert("더 이상 오른쪽으로 넘길 수 없습니다.");
     } else {
       setPosition(position + 1);
@@ -35,7 +35,7 @@ const Body = () => {
             width="50px"
             height="50px"
             style={{
-              opacity: position === 1 ? "0.2" : "1",
+              opacity: position === 0 ? "0.2" : "1",
               transition: "0.5s",
             }}
           />
@@ -45,7 +45,7 @@ const Body = () => {
             width="50px"
             height="50px"
             style={{
-              opacity: position === tempArr.length ? "0.2" : "1",
+              opacity: position === tempArr.length -1 ? "0.2" : "1",
               transition: "0.5s",
             }}
           />

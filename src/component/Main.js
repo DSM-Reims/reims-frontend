@@ -9,8 +9,8 @@ const Main = () => {
       <MainHeader
         buttons={[
           {
-            color: "red",
-            text: "Delete",
+            color: "black",
+            text: "Vote",
           },
         ]}
       />
