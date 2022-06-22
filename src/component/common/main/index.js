@@ -14,7 +14,7 @@ import { useUser } from "../../../contexts/user";
 const Body = () => {
   const [position, setPosition] = useState(0);
   const code = useCode();
-  const {} = useUser();
+  const { userData } = useUser();
   const { data } = useQuery("getResult", () => getResult(code));
   const { mutate: votesMutation } = useMutation(
     () => postVotes(code, data[position].clubId),
@@ -44,19 +44,23 @@ const Body = () => {
   return (
     <>
       <MainHeader
-        buttons={[
-          {
-            color: "black",
-            text: "Vote",
-            onClick: () => {
-              // eslint-disable-next-line no-restricted-globals
-              const result = confirm(`에 투표하시겠습니까?`);
-              if (result) {
-                votesMutation();
-              }
-            },
-          },
-        ]}
+        buttons={
+          userData === "CLUB"
+            ? [
+                {
+                  color: "black",
+                  text: "Vote",
+                  onClick: () => {
+                    // eslint-disable-next-line no-restricted-globals
+                    const result = confirm(`에 투표하시겠습니까?`);
+                    if (result) {
+                      votesMutation();
+                    }
+                  },
+                },
+              ]
+            : undefined
+        }
       />
       <Wrapper>
         <RelativeContainer>
