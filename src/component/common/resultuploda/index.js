@@ -15,12 +15,13 @@ const ResultUpload = ({ buttons = [] }) => {
           />
           <UploadWrapper>
             <UploadContainer>
+
               <p style={{marginLeft: '50px', marginBottom: "10px"}}>제목</p>
-              <ResultImpomationInput />
+              <ResultInformationInput />
               <p style={{marginLeft: '50px', marginBottom: "10px"}}>한 줄 설명</p>
-              <ResultImpomationInput />
+              <ResultInformationInput />
               <p style={{marginLeft: '50px', marginBottom: "10px"}}>한 줄 설명</p>
-              <ResultImpomationInput style={{height: '450px'}}/>
+              <ResultInformationInput style={{height: '450px'}}/>
             </UploadContainer>
           </UploadWrapper>
       </Wrapper>
@@ -52,7 +53,7 @@ const UploadContainer = styled.div`
   border-radius: 5px;
 `
 
-const ResultImpomationInput = styled.input`
+const ResultInformationInput = styled.input`
   width: 1000px;
   height: 40px;
   border-radius: 8px;
@@ -61,3 +62,5 @@ const ResultImpomationInput = styled.input`
   margin-left: 40px;
   outline: none;
 `
+
+const Result
