@@ -41,7 +41,15 @@ const RequirementItem = ({
       <td>{applicatedAt}</td>
       <td>{returnedAt}</td>
       <td>{isReturned ? "반납" : "미반납"}</td>
-      <td onClick={deleteObjectMutation}>삭제</td>
+      <td
+        onClick={() => {
+          // eslint-disable-next-line no-restricted-globals
+          const result = confirm("삭제하시겠습니까?");
+          result && deleteObjectMutation();
+        }}
+      >
+        삭제
+      </td>
     </tr>
   );
 };
