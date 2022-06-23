@@ -13,7 +13,7 @@ export const postVotes = async (code, clubId) => {
   return await ApiAgent.post(
     `/results/vote`,
     {
-      clud_id: clubId,
+      club_id: clubId,
     },
     code
   );
