@@ -108,7 +108,7 @@ const Wrapper = styled.div`
 
 const ItemContainer = styled(FlexCol)`
   box-sizing: border-box;
-  padding: 0 40px;
+  padding: 0 120px;
 `;
 
 const UploadContainer = styled.div`
