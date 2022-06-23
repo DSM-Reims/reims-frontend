@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://reims-api.xquare.app",
+  baseURL: "https://reims-api.xquare.app",
   timeout: 10000,
 });
 
