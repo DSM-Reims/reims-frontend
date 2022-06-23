@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://ec2-52-79-202-92.ap-northeast-2.compute.amazonaws.com:3000",
+  baseURL: "http://13.209.67.63:3000",
   timeout: 10000,
 });
 

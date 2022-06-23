@@ -22,8 +22,8 @@ const ThumbnailExplanation = ({ position, data }) => {
 
 const ThumbnailItem = ({
   clubId,
-  thumbnail,
   name,
+  club,
   description,
   index,
   position,
@@ -34,10 +34,19 @@ const ThumbnailItem = ({
 
   return (
     <ThumbItem style={position === index ? null : { opacity: 0.7 }}>
-      <ThumbImage
-        src={thumbnail}
-        style={position === index ? { width: "500px", height: "500px" } : {}}
-      />
+      {position === index ? (
+        <ThumbVideo autoPlay muted>
+          <source
+            src={`https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm`}
+          />
+        </ThumbVideo>
+      ) : (
+        <ThumbImage
+          src={`https://dsm-reims.s3.ap-northeast-2.amazonaws.com/${club.name}`}
+          style={position === index ? { width: "500px", height: "500px" } : {}}
+        />
+      )}
+
       <div>
         <div>
           {name} {userData === "TEACHER" && `| 투표수 ${data}`}
@@ -62,6 +71,14 @@ const Wrapper = styled.div`
     `translateX(-${(props.num - 1) * slideMovingUnit}px)`};
   transition: 0.3s;
   padding-left: 200px;
+`;
+
+const ThumbVideo = styled.video`
+  border: none;
+  width: 400px;
+  height: 400px;
+  transition: 0.3s;
+  background-color: gray;
 `;
 
 const ThumbImage = styled.img`

@@ -6,12 +6,15 @@ import MainHeader from "../Header";
 import ButtonContainer from "../Header/ButtonContainer";
 import { postResult, postPicture, postVideo } from "./apis";
 import { useCode } from "../../../hooks";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ResultUpload = ({ buttons = [] }) => {
   const [result, setResult] = useState({
     title: "",
     content: "",
   });
+
+  const navigate = useNavigate();
 
   const [picture, setPicture] = useState();
   const [video, setVideo] = useState();
@@ -30,6 +33,7 @@ const ResultUpload = ({ buttons = [] }) => {
   const { mutateAsync: postPictureMutate } = useMutation(() =>
     postPicture(code, picture)
   );
+
   return (
     <Wrapper>
       <MainHeader
@@ -39,8 +43,12 @@ const ResultUpload = ({ buttons = [] }) => {
             text: "Upload",
             onClick: async () => {
               await postResultMutate();
-              await postVideoMutate();
-              await postPictureMutate();
+              await Promise.all([
+                await postVideoMutate(),
+                await postPictureMutate(),
+              ]);
+              alert("업로드가 완료 되었습니다.");
+              navigate(`/${code}/home`);
             },
           },
         ]}
