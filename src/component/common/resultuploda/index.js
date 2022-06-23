@@ -42,13 +42,17 @@ const ResultUpload = ({ buttons = [] }) => {
             color: "black",
             text: "Upload",
             onClick: async () => {
-              await postResultMutate();
-              await Promise.all([
-                await postVideoMutate(),
-                await postPictureMutate(),
-              ]);
-              alert("업로드가 완료 되었습니다.");
-              navigate(`/${code}/home`);
+              try {
+                await postResultMutate();
+                await Promise.all([
+                  await postVideoMutate(),
+                  await postPictureMutate(),
+                ]);
+                alert("업로드가 완료 되었습니다.");
+                navigate(`/${code}/home`);
+              } catch (e) {
+                alert("업로드 도중 문제가 발생했습니다.");
+              }
             },
           },
         ]}
