@@ -49,7 +49,7 @@ const ThumbnailItem = ({
 
       <div>
         <div>
-          {name} {userData === "TEACHER" && `| 투표수 ${data}`}
+          {name} {userData?.userType === "TEACHER" && `| 투표수 ${data}`}
         </div>
         <div className="description">{description}</div>
       </div>
