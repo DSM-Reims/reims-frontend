@@ -88,7 +88,7 @@ const Body = () => {
               width="50px"
               height="50px"
               style={{
-                opacity: position === data?.length || 0 - 1 ? "0.2" : "1",
+                opacity: position === data?.length - 1 ? "0.2" : "1",
                 transition: "0.5s",
               }}
             />

@@ -71,6 +71,9 @@ const Modal = ({ modalClose }) => {
       queryClient.invalidateQueries("getObject");
       modalClose();
     },
+    onError: () => {
+      alert("동아리명을 확인해 주세요.");
+    },
   });
   return (
     <ModalContainer>
@@ -88,7 +91,7 @@ const Modal = ({ modalClose }) => {
           name="url"
           placeholder="URL"
         />
-        {userData?.userType === "ClUB" && (
+        {userData?.userType === "TEACHER" && (
           <Input
             onChange={onChangeHandler}
             value={object.clubName}

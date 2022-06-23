@@ -34,20 +34,24 @@ const ThumbnailItem = ({
 
   return (
     <ThumbItem style={position === index ? null : { opacity: 0.7 }}>
-      {position === index ? (
-        <ThumbVideo autoPlay muted>
-          <source
-            src={`https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm`}
+      <div
+        className="thumb-wrapper"
+        style={position === index ? { width: "500px", height: "500px" } : {}}
+      >
+        {position === index ? (
+          <ThumbVideo autoPlay muted>
+            <source
+              src={`https://dsm-reims.s3.ap-northeast-2.amazonaws.com/${club.name}-video`}
+            />
+          </ThumbVideo>
+        ) : (
+          <ThumbImage
+            src={`https://dsm-reims.s3.ap-northeast-2.amazonaws.com/${club.name}`}
           />
-        </ThumbVideo>
-      ) : (
-        <ThumbImage
-          src={`https://dsm-reims.s3.ap-northeast-2.amazonaws.com/${club.name}`}
-          style={position === index ? { width: "500px", height: "500px" } : {}}
-        />
-      )}
+        )}
+      </div>
 
-      <div>
+      <div className="info-wrapper">
         <div>
           {name} {userData?.userType === "TEACHER" && `| 투표수 ${data}`}
         </div>
@@ -75,24 +79,30 @@ const Wrapper = styled.div`
 
 const ThumbVideo = styled.video`
   border: none;
-  width: 400px;
-  height: 400px;
-  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+
   background-color: gray;
 `;
 
 const ThumbImage = styled.img`
   border: none;
-  width: 400px;
-  height: 400px;
-  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
 `;
 
 const ThumbItem = styled.div`
   flex-direction: column;
   justify-content: center;
   transition: 0.3s;
-  & > div {
+  & .thumb-wrapper {
+    width: 400px;
+    height: 400px;
+    transition: 0.3s;
+  }
+  & .info-wrapper {
     display: block;
     width: 400px;
     & .description {
