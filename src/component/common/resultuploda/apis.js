@@ -14,6 +14,7 @@ export const postResult = async (code, params) => {
 export const postVideo = async (code, files) => {
   const form = new FormData();
   form.append("data", files);
+  console.log(files);
   await ApiAgent.patch("/results/video", form, code);
 };
 

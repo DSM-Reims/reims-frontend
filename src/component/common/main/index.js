@@ -16,7 +16,7 @@ const Body = () => {
   const code = useCode();
   const { userData } = useUser();
   const { data } = useQuery("getResult", () => getResult(code));
-  const { mutate: votesMutation } = useMutation(
+  const { mutateAsync: votesMutation } = useMutation(
     () => postVotes(code, data[position].clubId),
     {
       onSuccess: () => {
@@ -45,16 +45,23 @@ const Body = () => {
     <>
       <MainHeader
         buttons={
-          userData === "CLUB"
+          userData?.userType === "CLUB"
             ? [
                 {
                   color: "black",
                   text: "Vote",
-                  onClick: () => {
+                  onClick: async () => {
                     // eslint-disable-next-line no-restricted-globals
-                    const result = confirm(`에 투표하시겠습니까?`);
+                    const result = confirm(
+                      `[${data[position].club?.name}] ${data[position]?.name}에 투표하시겠습니까?`
+                    );
                     if (result) {
-                      votesMutation();
+                      try {
+                        await votesMutation();
+                        alert("투표에 성공 했습니다.");
+                      } catch {
+                        alert("이미 투표에 참여 했습니다.");
+                      }
                     }
                   },
                 },
@@ -81,7 +88,7 @@ const Body = () => {
               width="50px"
               height="50px"
               style={{
-                opacity: position === data?.length || 0 - 1 ? "0.2" : "1",
+                opacity: position === data?.length - 1 ? "0.2" : "1",
                 transition: "0.5s",
               }}
             />

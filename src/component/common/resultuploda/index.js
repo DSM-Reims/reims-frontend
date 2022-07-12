@@ -6,12 +6,15 @@ import MainHeader from "../Header";
 import ButtonContainer from "../Header/ButtonContainer";
 import { postResult, postPicture, postVideo } from "./apis";
 import { useCode } from "../../../hooks";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ResultUpload = ({ buttons = [] }) => {
   const [result, setResult] = useState({
     title: "",
     content: "",
   });
+
+  const navigate = useNavigate();
 
   const [picture, setPicture] = useState();
   const [video, setVideo] = useState();
@@ -30,6 +33,7 @@ const ResultUpload = ({ buttons = [] }) => {
   const { mutateAsync: postPictureMutate } = useMutation(() =>
     postPicture(code, picture)
   );
+
   return (
     <Wrapper>
       <MainHeader
@@ -38,9 +42,17 @@ const ResultUpload = ({ buttons = [] }) => {
             color: "black",
             text: "Upload",
             onClick: async () => {
-              await postResultMutate();
-              await postVideoMutate();
-              await postPictureMutate();
+              try {
+                await postResultMutate();
+                await Promise.all([
+                  await postVideoMutate(),
+                  await postPictureMutate(),
+                ]);
+                alert("업로드가 완료 되었습니다.");
+                navigate(`/${code}/home`);
+              } catch (e) {
+                alert("업로드 도중 문제가 발생했습니다.");
+              }
             },
           },
         ]}
@@ -100,7 +112,7 @@ const Wrapper = styled.div`
 
 const ItemContainer = styled(FlexCol)`
   box-sizing: border-box;
-  padding: 0 40px;
+  padding: 0 120px;
 `;
 
 const UploadContainer = styled.div`

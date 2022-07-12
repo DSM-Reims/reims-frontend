@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FlexRow } from "../Flex";
 import ButtonContainer from "./ButtonContainer";
@@ -11,13 +11,13 @@ const MainHeader = ({ buttons = [] }) => {
     <Wrapper>
       <HeaderLeft>
         <div>
-          <Link to={`/${code}/home`}>Home</Link>
+          <NavLink to={`/${code}/home`}>Home</NavLink>
         </div>
         <div>
-          <Link to={`/${code}/resultupload`}>Upload</Link>
+          <NavLink to={`/${code}/resultupload`}>Upload</NavLink>
         </div>
         <div>
-          <Link to={`/${code}/requirement`}>Requirements</Link>
+          <NavLink to={`/${code}/requirement`}>Requirements</NavLink>
         </div>
       </HeaderLeft>
       <Title>Reims</Title>
@@ -60,6 +60,11 @@ const HeaderLeft = styled.div`
     text-decoration: none;
     transition: 0.3s;
     &:hover {
+      border-bottom: 1px solid black;
+    }
+
+    &.active {
+      font-weight: 500;
       border-bottom: 1px solid black;
     }
   }

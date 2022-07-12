@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "http://ec2-52-79-202-92.ap-northeast-2.compute.amazonaws.com:3000",
-  timeout: 10000,
+  baseURL: "https://reims-api.xquare.app",
+  timeout: 50000,
 });
 
 class ApiAgent {

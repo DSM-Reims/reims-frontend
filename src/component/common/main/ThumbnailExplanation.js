@@ -22,8 +22,8 @@ const ThumbnailExplanation = ({ position, data }) => {
 
 const ThumbnailItem = ({
   clubId,
-  thumbnail,
   name,
+  club,
   description,
   index,
   position,
@@ -34,13 +34,26 @@ const ThumbnailItem = ({
 
   return (
     <ThumbItem style={position === index ? null : { opacity: 0.7 }}>
-      <ThumbImage
-        src={thumbnail}
+      <div
+        className="thumb-wrapper"
         style={position === index ? { width: "500px", height: "500px" } : {}}
-      />
-      <div>
+      >
+        {position === index ? (
+          <ThumbVideo autoPlay muted>
+            <source
+              src={`https://dsm-reims.s3.ap-northeast-2.amazonaws.com/${club.name}-video`}
+            />
+          </ThumbVideo>
+        ) : (
+          <ThumbImage
+            src={`https://dsm-reims.s3.ap-northeast-2.amazonaws.com/${club.name}`}
+          />
+        )}
+      </div>
+
+      <div className="info-wrapper">
         <div>
-          {name} {userData === "TEACHER" && `| 투표수 ${data}`}
+          {name} {userData?.userType === "TEACHER" && `| 투표수 ${data}`}
         </div>
         <div className="description">{description}</div>
       </div>
@@ -64,18 +77,32 @@ const Wrapper = styled.div`
   padding-left: 200px;
 `;
 
+const ThumbVideo = styled.video`
+  border: none;
+  width: 100%;
+  height: 100%;
+
+  background-color: gray;
+`;
+
 const ThumbImage = styled.img`
   border: none;
-  width: 400px;
-  height: 400px;
-  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
 `;
 
 const ThumbItem = styled.div`
   flex-direction: column;
   justify-content: center;
   transition: 0.3s;
-  & > div {
+  & .thumb-wrapper {
+    width: 400px;
+    height: 400px;
+    transition: 0.3s;
+  }
+  & .info-wrapper {
     display: block;
     width: 400px;
     & .description {
